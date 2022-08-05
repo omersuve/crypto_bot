@@ -3,11 +3,19 @@ from datetime import datetime, timedelta
 import schedule
 import time
 import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 total_fails = 0
 total_profit_opportunities = 0
 latest_prices_dict = {}
-telegram_base_url = "https://api.telegram.org/bot5448377023:AAGbz5kG6r2HcFZdWMhe7wj1lQl9sKLRN4E/sendMessage?chat_id=-600005362&text={}"
+telegram_base_url = (
+    "https://api.telegram.org/bot"
+    + os.getenv("TOKEN_API_KEY")
+    + "/sendMessage?chat_id=-600005362&text={}"
+)
 
 symbols = [
     "BTCUSDT",
@@ -149,7 +157,7 @@ for symbol in symbols:
 
 print(latest_prices_dict)
 
-schedule.every(30).minutes.do(process)
+schedule.every(1).minutes.do(process)
 
 while True:
     schedule.run_pending()
