@@ -14,7 +14,9 @@ latest_prices_dict = {}
 telegram_base_url = (
     "https://api.telegram.org/bot"
     + os.getenv("TOKEN_API_KEY")
-    + "/sendMessage?chat_id=-600005362&text={}"
+    + "/sendMessage?chat_id="
+    + os.getenv("CHAT_ID")
+    + "&text={}"
 )
 
 symbols = [
